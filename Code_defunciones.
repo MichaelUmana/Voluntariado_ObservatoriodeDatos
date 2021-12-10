@@ -1,0 +1,32 @@
+#se cargan los paquetes. 
+
+library(readxl)
+library(ggplot2)
+library(tidyverse)
+
+#Se cargan los paquete después de aplicar un filtro desde el excel para la base de datos. solamente se dejan las difunciones que responden a transtornoS mentales. Debido a la utilización de ñ y tildes se ocupa el parametro  fileEncoding = "UTF-8-BOM" para solucinar el problema y que la base de datos este más limpia. 
+
+datos <- read.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRez7yA-Sprhxj-mh29zQNZamqY6Tb69vGlkMw5JdMakclwacJH70LzFMGuHrbYvp4YEd2VnQ1MIext/pub?output=csv",  fileEncoding = "UTF-8-BOM")
+
+#Se aplica un view a los datos para establecer
+
+head(datos)
+view(datos)
+
+
+#Se saca la edad media de las personas. 
+
+mean(datos$EDAD_CANT)
+
+#Se sacan unos estadisticos descriptivos para establecer una visualización de la base de datos. 
+
+table(datos$GLOSA_SEXO)
+
+table(datos$LUGAR_DEFUNCION)
+
+table(datos$GLOSA_SUBCATEGORIA_DIAG1)
+
+#histograma de las edades 
+
+ggplot(datos, aes(EDAD_CANT))+
+  geom_histogram(binwidth = 6)
